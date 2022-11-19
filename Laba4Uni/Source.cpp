@@ -5,7 +5,7 @@ using namespace std;
 
 int setValue(const char v[]);
 void outputArray(int** arr, int arraySize);
-int** create2DArray(unsigned height, unsigned width);
+int** create2DArray(unsigned arraySize);
 int getLeftMinimal(int** arr, int arraySize);
 int getRightMaximum(int** arr, int arraySize);
 void swapAndGetLeftMinRightMax(int** arr, int arraySize, int& leftMin, int& rightMax);
@@ -16,9 +16,9 @@ void main()
 {
 	srand(time(NULL));
 
-	const int arraySize = 3;
+	const int arraySize = setValue("arraySize");
 
-	int** arr = create2DArray(arraySize, arraySize);
+	int** arr = create2DArray(arraySize);
 
 	outputArray(arr, arraySize);
 
@@ -79,16 +79,16 @@ int setValue(const char v[])
 	return value;
 }
 
-int** create2DArray(unsigned height, unsigned width)
+int** create2DArray(unsigned arraySize)
 {
 	int** array2D = 0;
-	array2D = new int* [height];
+	array2D = new int* [arraySize];
 
-	for (int h = 0; h < height; h++)
+	for (int h = 0; h < arraySize; h++)
 	{
-		array2D[h] = new int[width];
+		array2D[h] = new int[arraySize];
 
-		for (int w = 0; w < width; w++)
+		for (int w = 0; w < arraySize; w++)
 		{
 			// fill in some initial values
 			// (filling in zeros would be more logic, but this is just for the example)
