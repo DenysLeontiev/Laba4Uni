@@ -9,6 +9,7 @@ int** create2DArray(unsigned height, unsigned width);
 int getLeftMinimal(int** arr, int arraySize);
 int getRightMaximum(int** arr, int arraySize);
 void swapAndGetLeftMinRightMax(int** arr, int arraySize, int& leftMin, int& rightMax);
+float averageValue(int a, int b);
 
 
 void main()
@@ -32,6 +33,9 @@ void main()
 	cout << "============================================" << endl;
 	cout << "leftMin = " << minLeft << endl;
 	cout << "rightMax = " << maxRight << endl;
+	cout << "averageValue = " << averageValue(minLeft, maxRight) << endl;
+
+	
 
 	cout << "============================================" << endl;
 	cout << "After swapping: " << endl;
@@ -172,5 +176,10 @@ void swapAndGetLeftMinRightMax(int** arr, int arraySize, int& leftMin, int& righ
 	int temp = arr[iMin][jMin];
 	arr[iMin][jMin] = arr[iMax][jMax];
 	arr[iMax][jMax] = temp;
+}
+
+float averageValue(int a, int b)
+{
+	return (float)(a + b) / 2;
 }
 
