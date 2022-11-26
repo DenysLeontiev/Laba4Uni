@@ -6,8 +6,8 @@ using namespace std;
 int setValue(const char v[]);
 void outputArray(int** arr, int arraySize);
 int** create2DArray(unsigned arraySize);
-int getLeftMinimal(int** arr, int arraySize);
-int getRightMaximum(int** arr, int arraySize);
+//int getLeftMinimal(int** arr, int arraySize);
+//int getRightMaximum(int** arr, int arraySize);
 void swapAndGetLeftMinRightMax(int** arr, int arraySize, int& leftMin, int& rightMax);
 float averageValue(int a, int b);
 
@@ -40,6 +40,14 @@ void main()
 	cout << "============================================" << endl;
 	cout << "After swapping: " << endl;
 	outputArray(arr, arraySize);
+
+	for (int i = 0; i < arraySize; i++)
+	{
+		delete[] arr[i];
+	}
+	delete[] arr;
+
+	arr = nullptr;
 }
 
 void outputArray(int** arr, int arraySize)
