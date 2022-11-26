@@ -16,7 +16,13 @@ void main()
 {
 	srand(time(NULL));
 
-	const int arraySize = setValue("arraySize");
+	int arraySize = 0;
+
+	while (arraySize <= 1)
+	{
+		arraySize = setValue("arraySize");
+		cout.clear();
+	}
 
 	double** arr = create2DArray(arraySize);
 
