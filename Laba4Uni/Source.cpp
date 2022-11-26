@@ -4,11 +4,11 @@
 using namespace std;
 
 int setValue(const char v[]);
-void outputArray(int** arr, int arraySize);
-int** create2DArray(unsigned arraySize);
+void outputArray(double** arr, int arraySize);
+double** create2DArray(unsigned arraySize);
 //int getLeftMinimal(int** arr, int arraySize);
 //int getRightMaximum(int** arr, int arraySize);
-void swapAndGetLeftMinRightMax(int** arr, int arraySize, int& leftMin, int& rightMax);
+void swapAndGetLeftMinRightMax(double** arr, int arraySize, int& leftMin, int& rightMax);
 float averageValue(int a, int b);
 
 
@@ -18,7 +18,7 @@ void main()
 
 	const int arraySize = setValue("arraySize");
 
-	int** arr = create2DArray(arraySize);
+	double** arr = create2DArray(arraySize);
 
 	outputArray(arr, arraySize);
 
@@ -50,7 +50,7 @@ void main()
 	arr = nullptr;
 }
 
-void outputArray(int** arr, int arraySize)
+void outputArray(double** arr, int arraySize)
 {
 	for (int i = 0; i < arraySize; i++)
 	{
@@ -87,19 +87,17 @@ int setValue(const char v[])
 	return value;
 }
 
-int** create2DArray(unsigned arraySize)
+double** create2DArray(unsigned arraySize)
 {
-	int** array2D = 0;
-	array2D = new int* [arraySize];
+	//int** array2D = 0;
+	double** array2D = new double* [arraySize];
 
 	for (int h = 0; h < arraySize; h++)
 	{
-		array2D[h] = new int[arraySize];
+		array2D[h] = new double[arraySize];
 
 		for (int w = 0; w < arraySize; w++)
 		{
-			// fill in some initial values
-			// (filling in zeros would be more logic, but this is just for the example)
 			array2D[h][w] = rand() % 20;
 		}
 	}
@@ -147,7 +145,7 @@ int** create2DArray(unsigned arraySize)
 //	return rightMax;
 //}
 
-void swapAndGetLeftMinRightMax(int** arr, int arraySize, int& leftMin, int& rightMax)
+void swapAndGetLeftMinRightMax(double** arr, int arraySize, int& leftMin, int& rightMax)
 {
 	int iMin = 1, jMin = 0;
 	int iMax = 0, jMax = 1;
