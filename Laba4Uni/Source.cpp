@@ -8,7 +8,7 @@ void outputArray(double** arr, int arraySize);
 double** create2DArray(unsigned arraySize);
 //int getLeftMinimal(int** arr, int arraySize);
 //int getRightMaximum(int** arr, int arraySize);
-void swapAndGetLeftMinRightMax(double** arr, int arraySize, int& leftMin, int& rightMax);
+void swapAndGetLeftMinRightMax(double** arr, int arraySize, double& leftMin, double& rightMax);
 float averageValue(int a, int b);
 
 
@@ -32,8 +32,8 @@ void main()
 	int rightMax = getRightMaximum(arr, arraySize);*/
 
 
-	int minLeft;
-	int maxRight;
+	double minLeft;
+	double maxRight;
 	swapAndGetLeftMinRightMax(arr, arraySize, minLeft, maxRight);
 
 	cout << "============================================" << endl;
@@ -49,7 +49,8 @@ void main()
 
 	for (int i = 0; i < arraySize; i++)
 	{
-		delete[] arr[i];
+		delete[] * (arr + i);
+		//delete[] arr[i];
 	}
 	delete[] arr;
 
@@ -62,7 +63,8 @@ void outputArray(double** arr, int arraySize)
 	{
 		for (int j = 0; j < arraySize; j++)
 		{
-			cout << arr[i][j] << "\t";
+			//cout << arr[i][j] << "\t";
+			cout << *(*(arr + i) + j) << "\t";
 		}
 
 		cout << endl;
@@ -100,11 +102,14 @@ double** create2DArray(unsigned arraySize)
 
 	for (int h = 0; h < arraySize; h++)
 	{
-		array2D[h] = new double[arraySize];
+		//array2D[h] = new double[arraySize];
+		*(array2D + h) = new double[arraySize];
 
 		for (int w = 0; w < arraySize; w++)
 		{
-			array2D[h][w] = rand() % 20;
+			//array2D[h][w] = rand() % 20;
+			//array2D[h][w] = rand() % 20;
+			*(*(array2D + h) + w) = rand() % 20;
 		}
 	}
 
@@ -151,14 +156,16 @@ double** create2DArray(unsigned arraySize)
 //	return rightMax;
 //}
 
-void swapAndGetLeftMinRightMax(double** arr, int arraySize, int& leftMin, int& rightMax)
+void swapAndGetLeftMinRightMax(double** arr, int arraySize, double& leftMin, double& rightMax)
 {
 	int iMin = 1, jMin = 0;
 	int iMax = 0, jMax = 1;
 
 
-	leftMin = arr[1][0];
-	rightMax = arr[0][1];
+	/*leftMin = arr[1][0];
+	rightMax = arr[0][1];*/
+	leftMin = *(*(arr + 1) + 0);
+	rightMax = *(*(arr + 0) + 1);
 
 	for (int i = 0; i < arraySize; i++)
 	{
@@ -166,18 +173,18 @@ void swapAndGetLeftMinRightMax(double** arr, int arraySize, int& leftMin, int& r
 		{
 			if (i > j)
 			{
-				if (leftMin > arr[i][j])
+				if (leftMin >/* arr[i][j]*/  *(*(arr + i) + j))
 				{
-					leftMin = arr[i][j];
+					leftMin = *(*(arr + i) + j);
 					iMin = i;
 					jMin = j;
 				}
 			}
 			else if (j > i)
 			{
-				if (rightMax < arr[i][j])
+				if (rightMax < *(*(arr + i) + j))
 				{
-					rightMax = arr[i][j];
+					rightMax = *(*(arr + i) + j);
 					iMax = i;
 					jMax = j;
 				}
@@ -185,9 +192,13 @@ void swapAndGetLeftMinRightMax(double** arr, int arraySize, int& leftMin, int& r
 		}
 	}
 
-	int temp = arr[iMin][jMin];
+	/*int temp = arr[iMin][jMin];
 	arr[iMin][jMin] = arr[iMax][jMax];
-	arr[iMax][jMax] = temp;
+	arr[iMax][jMax] = temp;*/
+
+	double temp = *(*(arr + iMin) + jMin);
+	*(*(arr + iMin) + jMin) = *(*(arr + iMax) + jMax);
+	*(*(arr + iMax) + jMax) = temp;
 }
 
 float averageValue(int a, int b)
