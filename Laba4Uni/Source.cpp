@@ -6,8 +6,6 @@ using namespace std;
 int setValue(const char v[]);
 void outputArray(double** arr, int arraySize);
 double** create2DArray(unsigned arraySize);
-//int getLeftMinimal(int** arr, int arraySize);
-//int getRightMaximum(int** arr, int arraySize);
 void swapAndGetLeftMinRightMax(double** arr, int arraySize, double& leftMin, double& rightMax);
 float averageValue(int a, int b);
 
@@ -27,10 +25,6 @@ void main()
 	double** arr = create2DArray(arraySize);
 
 	outputArray(arr, arraySize);
-
-	/*int leftMin = getLeftMinimal(arr, arraySize);
-	int rightMax = getRightMaximum(arr, arraySize);*/
-
 
 	double minLeft;
 	double maxRight;
@@ -116,46 +110,6 @@ double** create2DArray(unsigned arraySize)
 	return array2D;
 }
 
-//int getLeftMinimal(int** arr, int arraySize)
-//{
-//	int leftMin = arr[1][0];
-//	for (int i = 0; i < arraySize; i++)
-//	{
-//		for (int j = 0; j < arraySize; j++)
-//		{
-//			if (i > j)
-//			{
-//				if (leftMin > arr[i][j])
-//				{
-//					leftMin = arr[i][j];
-//				}
-//			}
-//		}
-//	}
-//
-//	return leftMin;
-//}
-//
-//int getRightMaximum(int** arr, int arraySize)
-//{
-//	int rightMax = arr[0][1];
-//	for (int i = 0; i < arraySize; i++)
-//	{
-//		for (int j = 0; j < arraySize; j++)
-//		{
-//			if (j > i)
-//			{
-//				if (rightMax < arr[i][j])
-//				{
-//					rightMax = arr[i][j];
-//				}
-//			}
-//		}
-//	}
-//
-//	return rightMax;
-//}
-
 void swapAndGetLeftMinRightMax(double** arr, int arraySize, double& leftMin, double& rightMax)
 {
 	int iMin = 1, jMin = 0;
@@ -169,26 +123,40 @@ void swapAndGetLeftMinRightMax(double** arr, int arraySize, double& leftMin, dou
 
 	for (int i = 0; i < arraySize; i++)
 	{
-		for (int j = 0; j < arraySize; j++)
+		for (int j = i + 1; j < arraySize; j++)
 		{
-			if (i > j)
+
+			if (*(*(arr + i) + j) > rightMax)
 			{
-				if (leftMin >/* arr[i][j]*/  *(*(arr + i) + j))
-				{
-					leftMin = *(*(arr + i) + j);
-					iMin = i;
-					jMin = j;
-				}
+				iMax = i;
+				jMax = j;
+				rightMax = *(*(arr + i) + j);
 			}
-			else if (j > i)
+
+			if (*(*(arr + j) + i) < leftMin)
 			{
-				if (rightMax < *(*(arr + i) + j))
-				{
-					rightMax = *(*(arr + i) + j);
-					iMax = i;
-					jMax = j;
-				}
+				leftMin = *(*(arr + j) + i);
+				iMin = j;
+				jMin = i;
 			}
+			//if (i > j)
+			//{
+			//	if (leftMin >/* arr[i][j]*/  *(*(arr + i) + j))
+			//	{
+			//		leftMin = *(*(arr + i) + j);
+			//		iMin = i;
+			//		jMin = j;
+			//	}
+			//}
+			//else if (j > i)
+			//{
+			//	if (rightMax < *(*(arr + i) + j))
+			//	{
+			//		rightMax = *(*(arr + i) + j);
+			//		iMax = i;
+			//		jMax = j;
+			//	}
+			//}
 		}
 	}
 
