@@ -5,14 +5,14 @@ using namespace std;
 
 int setValue(const char v[]);
 void outputArray(double** arr, int arraySize);
-double** create2DArray(unsigned arraySize);
+double** create2DArray(int arraySize);
 void swapAndGetLeftMinRightMax(double** arr, int arraySize, double& leftMin, double& rightMax);
-float averageValue(int a, int b);
+double averageValue(double a, double b);
+void drawLine(int = 20,char = '=');
 
-
-void main()
+int main()
 {
-	srand(time(NULL));
+	srand((unsigned)time(NULL));
 
 	int arraySize = 0;
 
@@ -30,14 +30,14 @@ void main()
 	double maxRight;
 	swapAndGetLeftMinRightMax(arr, arraySize, minLeft, maxRight);
 
-	cout << "============================================" << endl;
+	drawLine();
 	cout << "leftMin = " << minLeft << endl;
 	cout << "rightMax = " << maxRight << endl;
 	cout << "averageValue = " << averageValue(minLeft, maxRight) << endl;
 
 	
 
-	cout << "============================================" << endl;
+	drawLine();
 	cout << "After swapping: " << endl;
 	outputArray(arr, arraySize);
 
@@ -49,6 +49,8 @@ void main()
 	delete[] arr;
 
 	arr = nullptr;
+
+	return 0;
 }
 
 void outputArray(double** arr, int arraySize)
@@ -57,7 +59,6 @@ void outputArray(double** arr, int arraySize)
 	{
 		for (int j = 0; j < arraySize; j++)
 		{
-			//cout << arr[i][j] << "\t";
 			cout << *(*(arr + i) + j) << "\t";
 		}
 
@@ -67,8 +68,6 @@ void outputArray(double** arr, int arraySize)
 
 int setValue(const char v[])
 {
-	srand(time(NULL));
-
 	int error;
 	int value;
 	do
@@ -89,9 +88,8 @@ int setValue(const char v[])
 	return value;
 }
 
-double** create2DArray(unsigned arraySize)
+double** create2DArray(int arraySize)
 {
-	//int** array2D = 0;
 	double** array2D = new double* [arraySize];
 
 	for (int h = 0; h < arraySize; h++)
@@ -169,8 +167,17 @@ void swapAndGetLeftMinRightMax(double** arr, int arraySize, double& leftMin, dou
 	*(*(arr + iMax) + jMax) = temp;
 }
 
-float averageValue(int a, int b)
+void drawLine(int n, char c)
 {
-	return (float)(a + b) / 2;
+	cout.fill(c);
+	cout.width(n + 1);
+	cout << "\n";
+	cout.fill(' ');
+	//cout << setfill(c) << setw(n + 1) << '\n' << setfill(' ');
+}
+
+double averageValue(double a, double b)
+{
+	return (a + b) / 2;
 }
 
